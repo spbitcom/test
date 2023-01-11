@@ -18,6 +18,23 @@ services:
     
     volumes:
       - ./:/var/www/
-
+    depends_on:
+      - db
     user: ${HOSTUSER}
     container_name: header_app
+
+  db:
+    image: mysql:8.0.31
+    restart: always
+    user: ${HOSTUSER}
+    volumes:
+      - ./tmp/db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=msqlroot1iu
+      - MYSQL_DATABASE=headerlink
+      - MYSQL_USER=headerlink
+      - MYSQL_PASSWORD=4j93LKJ@kn3
+    ports:
+      - 3307:3306
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    container_name: header_db
