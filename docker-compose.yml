@@ -7,7 +7,7 @@ services:
       - ./:/var/www/
       - ./_docker/nginx/conf.d/:/etc/nginx/conf.d/
     ports:
-      - "8876:80"
+      - "${NGINXPORT}:80"
     container_name: header_nginx
     depends_on:
       - app
@@ -19,4 +19,5 @@ services:
     volumes:
       - ./:/var/www/
 
+    user: ${HOSTUSER}
     container_name: header_app
